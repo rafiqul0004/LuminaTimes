@@ -22,7 +22,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ArticleSerializer
     filter_backends = [filters.SearchFilter]
     pagination_class=ArticlePagination
-    search_fields = ['headline','category']
+    search_fields = ['headline', 'category__name']
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = models.Category.objects.all()
