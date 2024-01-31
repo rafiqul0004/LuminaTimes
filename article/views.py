@@ -29,37 +29,43 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.CategorySerializer
 
 
-class ArticleCreateView(viewsets.ModelViewSet):
-    queryset = models.Article.objects.all()
-    serializer_class = serializers.ArticleSerializer
 
-    def create(self, request):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-class ReviewCreateViewSet(viewsets.ModelViewSet, mixins.CreateModelMixin):
-    queryset = models.Review.objects.all()
-    serializer_class = serializers.ReviewSerializer
 
-    def create(self, request, pk):
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(article=models.Article.objects.get(pk=pk), reviewer=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+
+# class ArticleCreateView(viewsets.ModelViewSet):
+#     queryset = models.Article.objects.all()
+#     serializer_class = serializers.ArticleSerializer
+
+#     def create(self, request):
+#         serializer = self.serializer_class(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# class ReviewCreateViewSet(viewsets.ModelViewSet, mixins.CreateModelMixin):
+#     queryset = models.Review.objects.all()
+#     serializer_class = serializers.ReviewSerializer
+
+#     def create(self, request, pk):
+#         serializer = self.serializer_class(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save(article=models.Article.objects.get(pk=pk), reviewer=request.user)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
 
-class UpdateArticleView(generics.UpdateAPIView):
-    queryset = models.Article.objects.all()
-    serializer_class = serializers.ArticleSerializer
+# class UpdateArticleView(generics.UpdateAPIView):
+#     queryset = models.Article.objects.all()
+#     serializer_class = serializers.ArticleSerializer
 
-    def put(self, request, pk):
-        article = self.get_object()
-        serializer = self.get_serializer(article, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk):
+#         article = self.get_object()
+#         serializer = self.get_serializer(article, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_200_OK)
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
