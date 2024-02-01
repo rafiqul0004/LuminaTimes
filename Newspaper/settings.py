@@ -27,9 +27,14 @@ SECRET_KEY = 'django-insecure-*(0xtzp#hm@(ryncpd8d34!(!&+i7e6q0ap!2g+pu+ayxp4zw-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Cors problem
 ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_ALL_ORIGINS=True
 
-CSRF_TRUSTED_ORIGINS = ['https://luminatimes.onrender.com','https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://luminatimes.onrender.com']
+
+# CSRF_TRUSTED_ORIGINS = ['https://luminatimes.onrender.com','https://*.127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
+    'corsheaders',
     'rest_framework',
     'user',
     'article',
@@ -48,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
